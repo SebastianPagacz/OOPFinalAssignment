@@ -7,8 +7,6 @@ namespace RpgCombat.GameLogic;
 
 public class EnemyFactory : IFactory
 {
-    private Random _randomizer = new Random();
-
     private List<string> _randomNames = new List<string> 
     {
         "Scur",
@@ -24,13 +22,13 @@ public class EnemyFactory : IFactory
 
     public Unit SpawnRandomUnit()
     {
-        int minDamage = _randomizer.Next(4, 9);
-        int maxDamage = _randomizer.Next(minDamage, minDamage * 2);
+        int minDamage = Dice.Roll(4, 9);
+        int maxDamage = Dice.Roll(minDamage, minDamage * 2);
         Weapon weapon = new Weapon("Basic weapon", minDamage, maxDamage);
         var abilities = new List<Ability>();
         Ability a1 = new Attack("Basic Attack");
         abilities.Add(a1);
 
-        return new Enemy(_randomNames[_randomizer.Next(0, _randomNames.Count)], _randomizer.Next(25, 65), weapon, abilities);
+        return new Enemy(_randomNames[Dice.Roll(0, _randomNames.Count - 1)], Dice.Roll(25, 65), weapon, abilities);
     }
 }

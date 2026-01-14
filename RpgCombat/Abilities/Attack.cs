@@ -4,7 +4,6 @@ namespace RpgCombat.Abilities;
 
 public class Attack : Ability
 {
-    private Random _randomizer = new Random();
     public Attack(string name)
     {
         Name = name;
@@ -12,7 +11,8 @@ public class Attack : Ability
 
     public override void Use(Unit user, Unit target)
     {
-        int damageRolled = _randomizer.Next(user.Weapon.MinDamage, user.Weapon.MaxDamage + 1);
+        Log($"{user.Name} attacks {target.Name} using {this.Name}");
+        int damageRolled = Dice.Roll(user.Weapon.MinDamage, user.Weapon.MaxDamage);
         target.TakeDamage(damageRolled);
     }
 }

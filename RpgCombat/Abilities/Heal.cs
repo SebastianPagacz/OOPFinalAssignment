@@ -4,7 +4,6 @@ namespace RpgCombat.Abilities;
 
 public class Heal : Ability
 {
-    private Random _randomizer = new Random();
     public Heal(string name)
     {
         Name = name;
@@ -12,7 +11,8 @@ public class Heal : Ability
 
     public override void Use(Unit user, Unit target)
     {
-        int healingValue = _randomizer.Next(1, 11);
+        Log($"{user.Name} heals using {this.Name}");
+        int healingValue = Dice.Roll(1, 11);
         user.Heal(healingValue);
     }
 }

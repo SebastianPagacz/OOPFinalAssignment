@@ -54,19 +54,4 @@ public abstract class Unit
 
         OnLog?.Invoke($"{Name} heald for {healingValue}! Current health {Hp}/{MaxHp}");
     }
-
-    public virtual void UseAbility(string abilityName, Unit target)
-    {
-
-        var abilityToUse = Abilities.FirstOrDefault(ability => ability.Name == abilityName);
-
-        if (abilityToUse != null)
-        {
-            abilityToUse.Use(this, target);
-        }
-        else
-        {
-            OnLog?.Invoke($"{this.Name} does not know {abilityName}!");
-        }
-    }
 }
